@@ -37,17 +37,20 @@ struct session_wevent {
     };
 };
 
+enum session_timeout_state {
+    SESSION_TIMEOUT_STATE_NONE,
+    SESSION_TIMEOUT_STATE_NO_CLIENTS,
+};
+
 struct session {
-    uint32_t id;
-    uint32_t remove_on_tick;
-    bool f_in_empty_sessions : 1;
     struct worker *worker;
     LIST_HEAD(, client) clients;
     LIST_ENTRY(session) bucket_entry;
-    TAILQ_ENTRY(session) empty_sessions_entry;
-
-    /* buffer worker events when there are no clients connected. */
     STAILQ_HEAD(, session_wevent) queued_wevents;
+    TAILQ_ENTRY(session) timeout_entry;
+    uint32_t timeout_tick;
+    uint32_t id;
+    enum session_timeout_state timeout_state : 8;
 };
 
 struct session *session_start(struct client *client);
