@@ -1,1 +1,12 @@
+*.o
 *.pyc
+deps/libev-4.04/.deps
+deps/libev-4.04/Makefile
+deps/libev-4.04/config.h
+deps/libev-4.04/config.log
+deps/libev-4.04/config.status
+deps/libev-4.04/libtool
+deps/libev-4.04/stamp-h1
+deps/sha2-1.0/sha2
+pyspawner
+pyspawner-slap
