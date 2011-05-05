@@ -51,10 +51,10 @@ rbuf_add_ref(struct rbuf *rbuf)
  * Get in the habit of writing:
  * struct rbuf *x;
  * x = rbuf_alloc_and_ref(2);
- * x = rbuf_unref(x);
+ * x = rbuf_release(x);
  */
 static inline struct rbuf *
-rbuf_unref(struct rbuf *rbuf)
+rbuf_release(struct rbuf *rbuf)
 {
     ASSERT(rbuf->refcount > 0);
 
@@ -81,7 +81,7 @@ rbuf_get_slice_init(struct rbuf *rbuf, struct rbuf_slice *slice,
 static inline void
 rbuf_slice_uninit(struct rbuf_slice *slice)
 {
-    slice->rbuf = rbuf_unref(slice->rbuf);
+    slice->rbuf = rbuf_release(slice->rbuf);
 }
 
 /**

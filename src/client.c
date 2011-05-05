@@ -324,7 +324,7 @@ client_cb(EV_P_ ev_io *w, int revents)
         }
         rc = client_got_msg(EV_A_ client, msg_rx_last_hdr(&client->msg_rx),
                             msg_rx_last_body(&client->msg_rx));
-        msg_rx_unref_body(&client->msg_rx);
+        msg_rx_release_last_body(&client->msg_rx);
     }
  tx:
     if (!writeq_is_empty(&client->writeq)) {

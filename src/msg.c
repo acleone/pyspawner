@@ -82,7 +82,7 @@ msg_rx_read1(struct msg_rx *rx, int fd)
             return MSG_RX_RC_BAD_HDR_CHKSUM;
         }
         if (rx->body != NULL) {
-            rx->body = rbuf_unref(rx->body);
+            rx->body = rbuf_release(rx->body);
         }
         rx->body = rbuf_alloc_and_ref(hdr->len);
         if (rx->body == NULL) {

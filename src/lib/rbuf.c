@@ -67,7 +67,7 @@ rbuf_read_chunks(EV_P_ int fd, rbuf_read_cb read_cb, void *ctx)
 
     /* 5. unref used rbufs. */
     for (i = 0; i < used; i++) {
-        rbufs[i] = rbuf_unref(rbufs[i]);
+        rbufs[i] = rbuf_release(rbufs[i]);
     }
     return 0;
 }

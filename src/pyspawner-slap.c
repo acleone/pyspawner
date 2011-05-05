@@ -294,7 +294,7 @@ conn_read_ready_cb(EV_P_ ev_io *w, int revents)
     }
     rc = conn_got_msg(EV_A_ conn, msg_rx_last_hdr(&conn->msg_rx),
                       msg_rx_last_body(&conn->msg_rx));
-    msg_rx_unref_body(&conn->msg_rx);
+    msg_rx_release_last_body(&conn->msg_rx);
 
     if (conn->f_started && TAILQ_EMPTY(&conn->expected_q)) {
         // exec cycle done.

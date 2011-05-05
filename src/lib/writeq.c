@@ -18,9 +18,9 @@ void
 writeq_entry_free(struct writeq_entry *entry)
 {
     if (entry->type == WRITEQ_ENTRY_TYPE_RBUF) {
-        entry->rbuf = rbuf_unref(entry->rbuf);
+        entry->rbuf = rbuf_release(entry->rbuf);
     } else if (entry->type == WRITEQ_ENTRY_TYPE_RBUF_SLICE) {
-        rbuf_unref(entry->slice.rbuf);
+        rbuf_slice_uninit(&entry->slice);
     }
     free(entry);
 }

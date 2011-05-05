@@ -144,7 +144,7 @@ static inline void
 msg_rx_uninit(struct msg_rx *rx)
 {
     if (rx->body != NULL) {
-        rx->body = rbuf_unref(rx->body);
+        rx->body = rbuf_release(rx->body);
     }
 }
 
@@ -176,9 +176,9 @@ msg_rx_last_body(struct msg_rx *rx)
 }
 
 static inline void
-msg_rx_unref_body(struct msg_rx *rx)
+msg_rx_release_last_body(struct msg_rx *rx)
 {
-    rx->body = rbuf_unref(rx->body);
+    rx->body = rbuf_release(rx->body);
 }
 
 #endif /* MSG_H_ */

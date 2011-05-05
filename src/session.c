@@ -64,7 +64,7 @@ session_free_wevents(EV_P_ struct session *session)
                         next_wevent) {
         if (wevent->type == SESSION_WEVENT_OUTPUT) {
             for (i = 0; i < wevent->output.nrbufs; i++) {
-                wevent->output.rbufs[i] = rbuf_unref(wevent->output.rbufs[i]);
+                wevent->output.rbufs[i] = rbuf_release(wevent->output.rbufs[i]);
             }
         }
         free(wevent);
