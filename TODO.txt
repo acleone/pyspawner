@@ -1,1 +1,0 @@
-1. Convert sessions to timeout_entry, timeout_state, timeout_tick like clients.
