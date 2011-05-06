@@ -229,7 +229,7 @@ client_accept(EV_P_ int fd, const struct sockaddr *addr, socklen_t addrlen)
 {
     struct client *client;
 
-    if ((client = malloc(sizeof(*client))) == NULL) {
+    if ((client = calloc(1, sizeof(*client))) == NULL) {
         close(fd);
         return;
     }
@@ -241,7 +241,6 @@ client_start(EV_P_ struct client *client, int fd, const struct sockaddr *addr,
              socklen_t addrlen)
 {
     LOGF(3, "{ %d %s\n", fd, sockaddr_to_str(addr, addrlen));
-    memset(client, 0, sizeof(*client));
     ev_io_init(&client->watcher, client_cb, fd, EV_READ);
     ev_io_start(EV_A_ &client->watcher);
     msg_rx_init(&client->msg_rx);

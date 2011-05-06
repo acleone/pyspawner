@@ -26,10 +26,9 @@ int
 auth_add_entry(const char *uname, const char *pw, bool is_admin)
 {
     struct auth_entry *entry = NULL;
-    if ((entry = malloc(sizeof(*entry))) == NULL) {
+    if ((entry = calloc(1, sizeof(*entry))) == NULL) {
         goto fail;
     }
-    memset(entry, 0, sizeof(*entry));
     entry->uname_len = strlen(uname);
     entry->pw_len = strlen(pw);
     if ((entry->uname_len >= AUTH_MAX_UNAME_LEN) ||
