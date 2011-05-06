@@ -66,7 +66,7 @@ msg_rx_read1(struct msg_rx *rx, int fd)
             return MSG_RX_RC_ERROR;
         }
         LOGIF(15) {
-            printf("> %d read %d bytes: ", fd, nread);
+            printf("> %d read %zu bytes: ", fd, nread);
             print_repr(stdout, &rx->hdr_buf[rx->offset], nread, true);
             printf("\n");
         }
@@ -108,7 +108,7 @@ msg_rx_read1(struct msg_rx *rx, int fd)
             return MSG_RX_RC_ERROR;
         }
         LOGIF(15) {
-            printf("> %d read %d bytes: ", fd, nread);
+            printf("> %d read %zu bytes: ", fd, nread);
             print_repr(stdout, &rx->body->data[rx->offset], nread, true);
             printf("\n");
         }

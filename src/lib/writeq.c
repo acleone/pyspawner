@@ -85,7 +85,7 @@ writeq_write(struct writeq *q, int fd)
             return -1;
         }
         LOGIF(15) {
-            printf("< %d wrote %d bytes: ", fd, nsent);
+            printf("< %d wrote %zu bytes: ", fd, nsent);
             print_iov_repr(stdout, iov, nsent);
             printf("\n");
         }
