@@ -17,15 +17,18 @@ an newly setup environment could take up megabytes of memory.  If the server
 has lots of concurrent idle users, then it better have lots of memory.
 
 This project tries to solve some of these problems by forking an environment
-for each new client.  Any output from the forked worker process is sent to the
-client in type-length-value encoded messages, and clients can send messages
-to the worker process' stdin.
+for each new client.  Thanks to Copy-on-write, the new environment will barely
+use any memory until it's modified.
+
+Any output from the forked worker process is sent to the client in
+type-length-value encoded messages, and clients can send messages to the worker
+process' stdin.
 
 Overview
 ========
 
 * src/pyspawner.c - The main eventloop.
-* src/server.c - Set's up the accept()-ing socket for clients.
+* src/server.c - socket for accept()-ing clients.
 * src/client.c - Client interaction.
 * src/auth.c - Client authentication.
 * src/pyenv.c - The python execution environment.
